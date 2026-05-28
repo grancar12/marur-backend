@@ -1,5 +1,5 @@
 package com.marur.backend.config;
-
+import org.springframework.http.HttpMethod;
 import com.marur.backend.service.JwtService;
 import com.marur.backend.service.UserService;
 import jakarta.servlet.FilterChain;
@@ -45,6 +45,7 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/products/**").permitAll()
                         .requestMatchers("/api/categories/**").permitAll()
